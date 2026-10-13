@@ -1,6 +1,7 @@
 import { html, nothing } from "lit";
+import { renderGatewayConnection, type GatewayConnectionProps } from "./gateway-connection";
 
-export type OverviewProps = {
+export type OverviewProps = GatewayConnectionProps & {
   connected: boolean;
   updateStatus: {
     openclawVersion: string;
@@ -42,6 +43,8 @@ export function renderOverview(props: OverviewProps) {
         <span style="font-weight: 600;">Gateway</span>
         <span style="color: var(--text-muted, #888);">${connected ? "Connected" : "Disconnected"}</span>
       </div>
+
+      ${renderGatewayConnection(props)}
 
       ${updateStatus
         ? html`
