@@ -41,6 +41,10 @@ Your machine. Your data. Your rules. Nothing leaves your stack unless you say so
 
 ## Skip Months. Start in Minutes.
 
+### Host the interface on Netlify
+
+The existing GodMode web interface can be hosted on Netlify while connecting directly to your own OpenClaw gateway. The included `netlify.toml` builds the UI and publishes `ui/dist`; it does not deploy the gateway or move your data. See [Netlify deployment and gateway setup](docs/NETLIFY-DEPLOYMENT.md).
+
 ### Prerequisites
 
 - **Node.js 22+** (check with `node -v`, use [nvm](https://github.com/nvm-sh/nvm) to install)

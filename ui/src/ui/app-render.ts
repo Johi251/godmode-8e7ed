@@ -1077,6 +1077,9 @@ export function renderApp(state: AppViewState) {
             }
           </div>
           <div class="page-meta">
+            ${!state.connected && state.tab !== "overview"
+              ? html`<button class="btn" @click=${() => state.setTab("overview")}>Connect gateway</button>`
+              : nothing}
             ${
               state.reconnecting
                 ? (state.reconnectAttempt ?? 0) > 10
@@ -1712,6 +1715,12 @@ export function renderApp(state: AppViewState) {
           state.tab === "overview"
             ? renderOverview({
                 connected: state.connected,
+                gatewayUrl: state.settings.gatewayUrl,
+                onConnect: (gatewayUrl, token) => {
+                  state.password = "";
+                  state.applySettings({ ...state.settings, gatewayUrl, token });
+                  state.connect();
+                },
                 updateStatus: state.updateStatus,
                 updateLoading: state.updateLoading,
                 updateRunning: state.updateRunning,
