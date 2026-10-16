@@ -1,3 +1,4 @@
+import { cp, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { defineConfig } from "tsup";
 
@@ -16,7 +17,11 @@ export default defineConfig([
 		external: [
 			"openclaw/plugin-sdk",
 		],
-		onSuccess: "cp src/lib/auth-public-key.pem dist/auth-public-key.pem 2>/dev/null || true && mkdir -p dist/assets/workspace-templates && cp -r assets/workspace-templates/* dist/assets/workspace-templates/ 2>/dev/null || true",
+        async onSuccess() {
+            await mkdir("dist/assets", { recursive: true });
+            await cp("src/lib/auth-public-key.pem", "dist/auth-public-key.pem");
+            await cp("assets/workspace-templates", "dist/assets/workspace-templates", { recursive: true });
+        },
 	},
 	// 2. Hermes standalone + MCP entry
 	{
