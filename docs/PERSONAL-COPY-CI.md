@@ -46,7 +46,15 @@ APIs so the same build works on Windows and Linux. The package manager is
 pinned to prevent nested scripts from using a different global pnpm major.
 No generated UI snapshot changed.
 
-The existing production security audit remains a real failure: 156 findings
-(2 critical, 44 high, 97 moderate, 13 low) in the inherited dependency tree.
-It is not suppressed. These need separate dependency updates and runtime
-regression testing; the workflow/lock repair does not claim to fix them.
+The original production audit reported 156 findings. A focused follow-up
+removed the unused `mem0ai` dependency (the implemented memory facade only
+selects `honcho` or `none`), updated `ws` to 8.21.0 and DOMPurify to 3.4.16,
+and pinned the development host to the already tested OpenClaw 2026.3.23.
+The regenerated SQLite 12 lock and pnpm 9.15.9 pin remain in place.
+
+After those changes, `pnpm audit --prod --json` reports zero known production
+findings, and typecheck, full build and distribution checks pass. This does
+not imply complete security: an audit including development dependencies
+still finds vulnerabilities in the old OpenClaw development toolchain.
+Upgrade that host only after a separate compatibility investigation; the
+2026.10.4 SDK incompatibility has not been patched or hidden.

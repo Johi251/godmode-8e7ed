@@ -8,6 +8,7 @@ This file tracks recent development changes so the ally and other agents can qui
 
 - Replaced the inherited six-hour OpenClaw auto-upgrade loop with a manual, read-only compatibility check; explicit Bash pipefail preserves real failures.
 - Restricted npm publication to the upstream repository and preserved all hosting configuration.
+- Removed unused mem0ai (active memory facade supports honcho/none), updated ws to 8.21.0 and DOMPurify to 3.4.16, and pinned the tested OpenClaw 2026.3.23 development host. Production audit now reports zero known findings; the development toolchain still has separate vulnerabilities.
 - Regenerated the root pnpm 9 lockfile to match the existing SQLite dependency and pinned pnpm 9.15.9. Replaced Unix-only build asset copying with Node filesystem operations.
 - Documented repository provenance, preserved Netlify PR #1, and the unresolved OpenClaw 2026.10.4 SDK incompatibility in `docs/PERSONAL-COPY-CI.md`.
 
