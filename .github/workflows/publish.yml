@@ -7,6 +7,8 @@ on:
 
 jobs:
   publish:
+    # Upstream owns the npm namespace; this personal copy must not publish it.
+    if: github.repository == 'GodMode-Team/godmode'
     runs-on: ubuntu-latest
     permissions:
       contents: read
